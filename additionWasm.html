@@ -1,0 +1,43 @@
+<!doctype html>
+
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <title>Addition Wasm</title>
+</head>
+
+<body>
+    <script>
+        const memory = new WebAssembly.Memory({ initial: 256, maximum: 256 });
+        const importObj = {
+            env: {
+                abortStackOverflow: () => {
+                    throw new Error("overflow");
+                },
+                table: new WebAssembly.Table({
+                    initial: 0,
+                    maximum: 0,
+                    element: "anyfunc"
+                }),
+                tableBase: 0,
+                memory: memory,
+                memoryBase: 1024,
+                STACKTOP: 0,
+                STACK_MAX: memory.buffer.byteLength
+            }
+        };
+
+        fetch('additionWasm.wasm').then(response =>
+            response.arrayBuffer()
+        ).then(bytes =>
+            WebAssembly.instantiate(bytes, importObj)
+        ).then(result => {
+            const exports = result.instance.exports;
+            console.log('exports', exports);
+            console.log('Addition of 1, 2 is', exports._addition(1, 2));
+        });
+    </script>
+</body>
+
+</html>

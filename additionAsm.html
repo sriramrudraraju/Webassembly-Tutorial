@@ -1,0 +1,23 @@
+<!doctype html>
+
+<html>
+
+<head>
+  <meta charset="utf-8">
+  <title>WASM test</title>
+</head>
+
+<body>
+  <script type="text/javascript" src="additionAsm.js"></script>
+  <script>
+    Module['onRuntimeInitialized'] = onRuntimeInitialized;
+    Module.cwrap('_addition ', 'number');
+
+    function onRuntimeInitialized() {
+      console.log('Addition of 3, 2 is', _addition(3, 2));
+    }
+
+  </script>
+</body>
+
+</html>
