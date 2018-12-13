@@ -1,6 +1,6 @@
 # Getting Started With Webassembly and Asm.js Using Emscripten
 
-Tutorial on creating these files is explained in [wiki](https://github.com/sriramrudraraju/Webassembly-Tutorial/wiki/Wiki).
+Tutorial on creating these files is explained in [wiki](https://github.com/sriramrudraraju/Webassembly-Tutorial/wiki).
 
 ## Preview
 
